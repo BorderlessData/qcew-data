@@ -5,7 +5,7 @@ import numpy as np
 import sqlalchemy as sql
 from glob import glob
 
-engine = sql.create_engine('postgresql://scott:tiger@localhost:5432/qcew')
+engine = sql.create_engine('postgresql://localhost:5432/qcew')
 
 csv_dtype = {
   'area_fips': object,
