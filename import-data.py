@@ -98,7 +98,7 @@ sql_dtype = {
 }
 
 # Get list of files that end in *singlefile.csv
-file_names = glob('*singlefile.csv')
+file_names = glob('data/*_singlefile.csv')
 
 # Import is done in chunks of size = chunksize.
 # A single csv has roughly 3.7 million rows,
