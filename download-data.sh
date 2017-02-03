@@ -12,5 +12,5 @@ curl -L --remote-name-all $urls
 # Unzip all the zip files, each containing one csv
 unzip "*_singlefile.zip"
 
-mv *.zip data
-mv *.csv data
+mv *_singlefile.zip data
+mv *_singlefile.csv data
