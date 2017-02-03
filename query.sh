@@ -43,6 +43,7 @@ query="
 COPY (
     SELECT
         first.area_fips,
+        area_titles.area_title,
         (first.month1_emplvl + first.month2_emplvl + first.month3_emplvl) / 3 as avg_emplvl_1990,
         first.avg_wkly_wage as avg_wkly_wage_1990,
         (last.month1_emplvl + last.month2_emplvl + last.month3_emplvl) / 3 as avg_emplvl_2015,
@@ -50,7 +51,8 @@ COPY (
         (last.avg_wkly_wage - first.avg_wkly_wage) / first.avg_wkly_wage as wage_pct_change
     FROM
         data as first,
-        data as last
+        data as last,
+        area_titles
     WHERE
         first.year = '1990' AND
         first.qtr = '1' AND
@@ -66,7 +68,8 @@ COPY (
         last.agglvl_code = '70' AND
         (last.size_code = '0' OR last.size_code = '') AND
 
-        first.area_fips = last.area_fips
+        first.area_fips = last.area_fips AND
+        area_titles.area_fips = first.area_fips
 ) TO '$path/output.csv' DELIMITER ',' CSV HEADER;"
 
 psql -q qcew -c "$query"
