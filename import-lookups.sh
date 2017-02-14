@@ -2,20 +2,22 @@
 
 path=$(pwd)
 
-# query="
-#     CREATE TABLE area_titles (
-#         area_fips varchar,
-#         area_title varchar
-#     );
-#
-#     CREATE UNIQUE INDEX area_fips_lookup_index ON area_titles (area_fips);
-#
-#     COPY area_titles(area_fips, area_title)
-#         FROM '$path/area_titles.csv' DELIMITER ',' CSV HEADER;
-# "
-#
-# psql -q qcew -c "$query"
+# Area titles
+query="
+    CREATE TABLE area_titles (
+        area_fips varchar,
+        area_title varchar
+    );
 
+    CREATE UNIQUE INDEX area_fips_lookup_index ON area_titles (area_fips);
+
+    COPY area_titles(area_fips, area_title)
+        FROM '$path/area_titles.csv' DELIMITER ',' CSV HEADER;
+"
+
+psql -q qcew -c "$query"
+
+# Ownership codes
 query="
     CREATE TABLE ownership_titles (
         own_code varchar,
@@ -30,6 +32,7 @@ query="
 
 psql -q qcew -c "$query"
 
+# Industry titles
 query="
     CREATE TABLE industry_titles (
         industry_code varchar,
@@ -44,6 +47,7 @@ query="
 
 psql -q qcew -c "$query"
 
+# Aggregation level codes
 query="
     CREATE TABLE agglvl_titles (
         agglvl_code varchar,
@@ -58,6 +62,7 @@ query="
 
 psql -q qcew -c "$query"
 
+# Size codes
 query="
     CREATE TABLE size_titles (
         own_code varchar,

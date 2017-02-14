@@ -1,14 +1,14 @@
 # QCEW Data Loader
 
-Imports the entire Bureau of Labor Statistics Quarterly Census of Employement (1990 - current) and Wages into a Postgres database.
+Imports the entire Bureau of Labor Statistics Quarterly Census of Employement and Wages (from 1990 to latest) into a Postgres database.
 
-The database created by this process will be about **80GB**. Make sure you have enough space before you start!
+The database created by this process will use about **80GB** of disk space. Make sure you have enough space available before you start!
 
 # Usage
 
 ```
 ./download_data.sh
-createdb qcew
+./create_db.sh
 ./import_data.sh
 ./import_lookups.sh
 ```
