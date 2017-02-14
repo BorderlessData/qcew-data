@@ -1,19 +1,19 @@
 #!/bin/bash
 
-path=$(pwd)
+source config.sh
 
 # All businesses
-# query="
+# QUERY="
 # COPY (
 #     SELECT agglvl_code, size_code, year, qtr, month1_emplvl, month2_emplvl, month3_emplvl
 #     FROM data
 #     WHERE area_fips = 'US000'
 #         AND own_code = '0'
 #         AND industry_code = '10'
-# ) TO '$path/national.csv' DELIMITER ',' CSV HEADER;"
+# ) TO '$PATH/national.csv' DELIMITER ',' CSV HEADER;"
 
 # All businesses, by month
-# query="
+# QUERY="
 # COPY (
 #     SELECT
 #         year,
@@ -23,10 +23,10 @@ path=$(pwd)
 #     WHERE data.area_fips = 'US000'
 #         AND data.own_code = '0'
 #         AND data.industry_code = '10'
-# ) TO '$path/national_by_month.csv' DELIMITER ',' CSV HEADER;"
+# ) TO '$PATH/national_by_month.csv' DELIMITER ',' CSV HEADER;"
 
 # Tyler Private Healthcare
-# query="
+# QUERY="
 # COPY (
 #     SELECT
 #         year,
@@ -36,10 +36,10 @@ path=$(pwd)
 #     WHERE data.area_fips = 'C4634'
 #         AND data.own_code = '5'
 #         AND data.industry_code = '621'
-# ) TO '$path/tyler_healthcare.csv' DELIMITER ',' CSV HEADER;"
+# ) TO '$PATH/tyler_healthcare.csv' DELIMITER ',' CSV HEADER;"
 
 # # Change in avg_weekly_wage from 1st quarter 1990 to 1st quarter 2015
-# query="
+# QUERY="
 # COPY (
 #     SELECT
 #         first.area_fips,
@@ -70,10 +70,10 @@ path=$(pwd)
 #         first.area_fips = last.area_fips AND
 #         first.agglvl_code = last.agglvl_code AND
 #         area_titles.area_fips = first.area_fips
-# ) TO '$path/wages_by_area.csv' DELIMITER ',' CSV HEADER;"
+# ) TO '$PATH/wages_by_area.csv' DELIMITER ',' CSV HEADER;"
 
 # Private Tyler businesses by sector and month
-# query="
+# QUERY="
 # COPY (
 #     SELECT
 #         data.industry_code,
@@ -90,10 +90,10 @@ path=$(pwd)
 #         AND data.size_code = '0'
 #         AND data.agglvl_code = '75'
 #         AND industry_titles.industry_code = data.industry_code
-# ) TO '$path/tyler_by_sector.csv' DELIMITER ',' CSV HEADER;"
+# ) TO '$PATH/tyler_by_sector.csv' DELIMITER ',' CSV HEADER;"
 
 # All private businesses
-query="
+QUERY="
 COPY (
     SELECT
         year,
@@ -105,6 +105,6 @@ COPY (
         AND data.own_code = '5'
         AND (data.size_code = '0' or data.size_code = '')
         AND data.industry_code = '10'
-) TO '$path/national_by_quarter_private.csv' DELIMITER ',' CSV HEADER;"
+) TO '$PATH/national_by_quarter_private.csv' DELIMITER ',' CSV HEADER;"
 
-psql -q qcew -c "$query"
+$PSQL -q $DATABASE -c "$QUERY"

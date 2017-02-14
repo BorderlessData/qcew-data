@@ -4,7 +4,7 @@ Imports the entire Bureau of Labor Statistics Quarterly Census of Employement an
 
 The database created by this process will use about **80GB** of disk space. Make sure you have enough space available before you start!
 
-# Usage
+## Usage
 
 ```
 ./download_data.sh
@@ -12,3 +12,7 @@ The database created by this process will use about **80GB** of disk space. Make
 ./import_data.sh
 ./import_lookups.sh
 ```
+
+## Notes
+
+Annual CPI comes from the [Minneapolis Fed](https://www.minneapolisfed.org/community/teaching-aids/cpi-calculator-information/consumer-price-index-and-inflation-rates-1913).

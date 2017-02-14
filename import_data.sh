@@ -1,8 +1,7 @@
 #!/bin/bash
 
-PATH=$(pwd)
-DATABASE="test"
-TABLE="data"
+source config.sh
+
 DATA_FILES=$PATH/data/*.singlefile.csv
 
 for f in $DATA_FILES
@@ -15,5 +14,5 @@ do
         FROM '$f' DELIMITER ',' CSV HEADER;
     "
 
-    /usr/local/bin/psql -q "$DATABASE" -c "$COPY_QUERY";
+    $PSQL -q "$DATABASE" -c "$COPY_QUERY";
 done

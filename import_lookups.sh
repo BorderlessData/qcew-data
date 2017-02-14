@@ -1,6 +1,6 @@
-#!/bin/bash
+# #!/bin/bash
 
-path=$(pwd)
+source config.sh
 
 # Area titles
 query="
@@ -12,10 +12,10 @@ query="
     CREATE UNIQUE INDEX area_fips_lookup_index ON area_titles (area_fips);
 
     COPY area_titles(area_fips, area_title)
-        FROM '$path/area_titles.csv' DELIMITER ',' CSV HEADER;
+        FROM '$PATH/area_titles.csv' DELIMITER ',' CSV HEADER;
 "
 
-psql -q qcew -c "$query"
+$PSQL -q $DATABASE -c "$query"
 
 # Ownership codes
 query="
@@ -27,10 +27,10 @@ query="
     CREATE UNIQUE INDEX own_code_lookup_index ON ownership_titles (own_code);
 
     COPY ownership_titles(own_code, own_title)
-        FROM '$path/ownership_titles.csv' DELIMITER ',' CSV HEADER;
+        FROM '$PATH/ownership_titles.csv' DELIMITER ',' CSV HEADER;
 "
 
-psql -q qcew -c "$query"
+$PSQL -q $DATABASE -c "$query"
 
 # Industry titles
 query="
@@ -42,10 +42,10 @@ query="
     CREATE UNIQUE INDEX industry_code_lookup_index ON industry_titles (industry_code);
 
     COPY industry_titles(industry_code, industry_title)
-        FROM '$path/industry_titles.csv' DELIMITER ',' CSV HEADER;
+        FROM '$PATH/industry_titles.csv' DELIMITER ',' CSV HEADER;
 "
 
-psql -q qcew -c "$query"
+$PSQL -q $DATABASE -c "$query"
 
 # Aggregation level codes
 query="
@@ -57,10 +57,10 @@ query="
     CREATE UNIQUE INDEX agglvl_code_lookup_index ON agglvl_titles (agglvl_code);
 
     COPY agglvl_titles(agglvl_code, agglvl_title)
-        FROM '$path/agglevel_titles.csv' DELIMITER ',' CSV HEADER;
+        FROM '$PATH/agglevel_titles.csv' DELIMITER ',' CSV HEADER;
 "
 
-psql -q qcew -c "$query"
+$PSQL -q $DATABASE -c "$query"
 
 # Size codes
 query="
@@ -72,7 +72,22 @@ query="
     CREATE UNIQUE INDEX own_code_lookup_index ON size_titles (own_code);
 
     COPY size_titles(own_code, own_title)
-        FROM '$path/size_titles.csv' DELIMITER ',' CSV HEADER;
+        FROM '$PATH/size_titles.csv' DELIMITER ',' CSV HEADER;
 "
 
-psql -q qcew -c "$query"
+$PSQL -q $DATABASE -c "$query"
+
+# CPI
+query="
+    CREATE TABLE annual_cpi (
+        year varchar,
+        cpi real
+    );
+
+    CREATE UNIQUE INDEX annual_cpi_lookup_index ON annual_cpi (year);
+
+    COPY annual_cpi(year, cpi)
+        FROM '$PATH/annual_cpi.csv' DELIMITER ',' CSV HEADER;
+"
+
+$PSQL -q $DATABASE -c "$query"

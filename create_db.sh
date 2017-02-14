@@ -1,7 +1,6 @@
 #!/bin/bash
 
-DATABASE="test"
-TABLE="data"
+source config.sh
 
 CREATE_QUERY="
     CREATE TABLE $TABLE (
@@ -54,4 +53,4 @@ CREATE_QUERY="
     CREATE INDEX ${TABLE}_agglvl_code_index ON $TABLE (agglvl_code);
 "
 
-psql -q "$DATABASE" -c "$CREATE_QUERY";
+$PSQL -q "$DATABASE" -c "$CREATE_QUERY";
