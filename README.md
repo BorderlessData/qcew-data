@@ -15,4 +15,6 @@ The database created by this process will use about **80GB** of disk space. Make
 
 ## Notes
 
-Annual CPI comes from the [Minneapolis Fed](https://www.minneapolisfed.org/community/teaching-aids/cpi-calculator-information/consumer-price-index-and-inflation-rates-1913).
+* QCEW lookup tables (in the `lookup` folder) are from the BLS's QCEW [layout documentation](https://data.bls.gov/cew/doc/layouts/csv_quarterly_layout.htm).
+
+* The annual CPI is from the [Minneapolis Fed](https://www.minneapolisfed.org/community/teaching-aids/cpi-calculator-information/consumer-price-index-and-inflation-rates-1913).
